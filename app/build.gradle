@@ -1,0 +1,75 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'androidx.navigation.safeargs.kotlin'
+
+
+android {
+    compileSdkVersion Version.compileSdkVersion
+    buildToolsVersion Version.buildToolsVersion
+
+    defaultConfig {
+        applicationId "com.muppet.lifepartnermvvm"
+        minSdkVersion Version.minSdkVersion
+        targetSdkVersion Version.targetSdkVersion
+        versionCode Version.versionCode
+        versionName Version.versionName
+
+        multiDexEnabled true
+
+        compileOptions {
+            sourceCompatibility JavaVersion.VERSION_1_8
+            targetCompatibility JavaVersion.VERSION_1_8
+        }
+        kotlinOptions {
+            jvmTarget = "1.8"
+        }
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildFeatures{
+        dataBinding = true
+        viewBinding = true
+    }
+
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+
+    implementation (Kotlin.stdlib)
+    implementation (Kotlin.coroutines.core)
+    implementation (Kotlin.coroutines.android)
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    implementation (AndroidX.coreKtx)
+    implementation (AndroidX.appcompat)
+    implementation (AndroidX.constraintLayout)
+
+    implementation (AndroidX.lifecycle.extensions)
+    implementation (AndroidX.lifecycle.viewModelKtx)
+    implementation (AndroidX.lifecycle.liveDataKtx)
+
+    implementation (AndroidX.navigation.fragmentKtx)
+    implementation (AndroidX.navigation.uiKtx)
+
+    implementation ThirdParties.retrofit.retrofit
+    implementation ThirdParties.retrofit.gson
+    implementation (ThirdParties.Interceptor.loggingInterceptor) {
+        exclude group: ThirdParties.Interceptor.group , module: ThirdParties.Interceptor.module
+    }
+
+
+
+}
