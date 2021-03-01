@@ -9,6 +9,7 @@ object AndroidX {
     const val coreKtx           = "androidx.core:core-ktx:1.3.2"
     const val appcompat         = "androidx.appcompat:appcompat:1.2.0"
     const val constraintLayout  = "androidx.constraintlayout:constraintlayout:2.0.4"
+    const val viewpager2        = "androidx.viewpager2:viewpager2:1.1.0-alpha01"
 
     val lifecycle = Lifecycle
     object Lifecycle {

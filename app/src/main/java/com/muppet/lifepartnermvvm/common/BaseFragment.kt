@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.viewbinding.ViewBinding
+import com.muppet.lifepartnermvvm.utils.ParamUtil
 
 /**
  * des：基础 mvvm Fragment
@@ -36,6 +37,7 @@ abstract class BaseFragment : Fragment() {
         // 必须要在Activity与Fragment绑定后，因为Fragment可能获取的是Activity中ViewModel
         // 必须在onCreateView之前初始化viewModel，因为onCreateView中需要通过ViewModel与DataBinding绑定
         initViewModel()
+        ParamUtil.initParam(this)
     }
 
     override fun onCreateView(
@@ -61,6 +63,35 @@ abstract class BaseFragment : Fragment() {
         super.onDestroy()
         //由于可能fragment的生命周期超出其视图的生命周期，因此需要将其设置为空，防止内存泄漏
         mBinding = null
+    }
+
+    /**
+     *  getActivityViewModel() 方法的简便调用方式
+     * 例如：getActivityViewModel<HomeVm>()
+     */
+    protected inline fun <reified T: ViewModel?> getActivityViewModel(): T = getActivityViewModel(T::class.java)
+    /**
+     *通过activity获取viewModel，目的让其跟随activity生命周期
+     */
+    protected fun <T: ViewModel?> getActivityViewModel(vmClazz:Class<T>) : T {
+        if (activityProvider == null) {
+            activityProvider = ViewModelProvider(mActivity)
+        }
+        return activityProvider!!.get(vmClazz)
+    }
+
+    /**
+     * 同上
+     */
+    protected inline fun <reified T : ViewModel?> getFragmentViewModel(): T = getFragmentViewModel(T::class.java)
+    /**
+     * 通过fragment获取view model，目的让其跟随fragment生命周期
+     */
+    protected fun <T: ViewModel?> getFragmentViewModel(vmClazz: Class<T>) : T {
+        if (fragmentProvider == null) {
+            fragmentProvider = ViewModelProvider(this)
+        }
+        return fragmentProvider!!.get(vmClazz)
     }
 
     /**
@@ -94,34 +125,5 @@ abstract class BaseFragment : Fragment() {
      */
     protected fun nav(): NavController{
         return NavHostFragment.findNavController(this)
-    }
-
-    /**
-     *  getActivityViewModel() 方法的简便调用方式
-     * 例如：getActivityViewModel<HomeVm>()
-     */
-    protected inline fun <reified T: ViewModel?> getActivityViewModel(): T = getActivityViewModel(T::class.java)
-    /**
-     *通过activity获取viewModel，目的让其跟随activity生命周期
-     */
-    protected fun <T: ViewModel?> getActivityViewModel(vmClazz:Class<T>) : T {
-        if (activityProvider == null) {
-            activityProvider = ViewModelProvider(mActivity)
-        }
-        return activityProvider!!.get(vmClazz)
-    }
-
-    /**
-     * 同上
-     */
-    protected inline fun <reified T : ViewModel?> getFragmentViewModel(): T = getFragmentViewModel(T::class.java)
-    /**
-     * 通过fragment获取view model，目的让其跟随fragment生命周期
-     */
-    protected fun <T: ViewModel?> getFragmentViewModel(vmClazz: Class<T>) : T {
-        if (fragmentProvider == null) {
-            fragmentProvider = ViewModelProvider(this)
-        }
-        return fragmentProvider!!.get(vmClazz)
     }
 }

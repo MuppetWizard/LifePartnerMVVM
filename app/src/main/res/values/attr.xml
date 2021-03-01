@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 一级主色调-->
+    <attr name="theme_color_1" format="color" />
+    <!-- 二级主色调-->
+    <attr name="theme_color_2" format="color" />
+    <!-- 三级主色调-->
+    <attr name="theme_color_3" format="color" />
+
+</resources>

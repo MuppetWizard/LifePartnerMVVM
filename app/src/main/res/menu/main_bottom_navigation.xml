@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_home"
+        android:checked="true"
+        android:icon="@mipmap/home_unchecked"
+        android:title="@string/tab_1"
+        />
+    <item
+        android:id="menu_weather"
+        android:icon="@mipmap/weather_uncheck"
+        android:title="@string/tab_2"
+        />
+    <item
+        android:id="menu_express"
+        android:icon="@mipmap/express_uncheck"
+        android:title="@string/tab_3"
+        />
+    <item
+        android:id="menu_mine"
+        android:icon="@mipmap/mine_uncheck"
+        android:title="@string/tab_4"
+        />
+</menu>
