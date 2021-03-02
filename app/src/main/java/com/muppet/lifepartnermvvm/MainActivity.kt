@@ -11,22 +11,23 @@ import com.muppet.lifepartnermvvm.ui.MainFragment
 /**
  * 主界面，主要作用是用于承载Fragment
  */
-class MainActivity : BaseActivity() {
+class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        binding = ActivityMainBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
     }
 
-    override fun init(savedInstanceState: Bundle?) {
+   /* override fun init(savedInstanceState: Bundle?) {
 
     }
 
-    /**
+    *//**
      * 设置状态栏沉浸模式
-     */
+     *//*
     override fun setStatusBar() {
 
     }
@@ -35,7 +36,7 @@ class MainActivity : BaseActivity() {
 
     }
 
-    override fun getLayoutBinding()= binding
+    override fun getLayoutBinding()= binding*/
 
     override fun onBackPressed() {
         //获取hostFragment
